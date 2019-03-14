@@ -7,25 +7,35 @@ var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 
+app.engine('handlebars',exphbs({
+  defaultLayout:'main'
+}));
 app.set('view engine', 'handlebars');
 
 router.get('/',function(req,res){
-    res.sendFile((__dirname+'/index'));
+    res.render("index");
   });
 
 router.get('/addgame',function(req,res){
-    res.sendFile((__dirname+'/addgame'));
+  res.render("addgame");
   });
 
 router.get('/login',function(req,res){
-    res.sendFile((__dirname+'/login'));
+  res.render("login");
   });
 
+router.get('/register',function(req,res){
+    res.render("register");
+    });
+
 app.post('/addgame', function(req,res){
-    res.sendFile((__dirname+'/index'));
+    res.redirect('/');
 });
 app.post('/login', function(req,res){
-    res.sendFile((__dirname+'/index'));
+    res.redirect('/');
+});
+app.post('/register', function(req,res){
+  res.redirect('/login');
 });
 
 app.use(express.static(__dirname + '/views'));
